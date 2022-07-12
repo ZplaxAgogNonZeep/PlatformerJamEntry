@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://LevelMechanics/Power/PLCenterActive.png" type="Texture" id=1]
+[ext_resource path="res://LevelMechanics/Power/PLCenterInactive.png" type="Texture" id=2]
+[ext_resource path="res://LevelMechanics/Power/PowerGate.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Inactive",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Active",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 6.5 )
+
+[node name="PowerGate" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PlatformManager" type="Node2D" parent="."]
+
+[node name="PivotPoint" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Inactive"
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, 128 )
+
+[node name="PositiveStorePoint" type="Position2D" parent="."]
+position = Vector2( 0, -64 )
+
+[node name="Outlet" type="Area2D" parent="."]
+position = Vector2( 0, -8 )
+collision_layer = 4
+collision_mask = 4
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outlet"]
+shape = SubResource( 2 )
